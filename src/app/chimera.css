@@ -65,3 +65,83 @@
     padding-left: 20px;
     border-left: 2px solid var(--line);
 }
+
+.service-feature {
+    text-align: center;
+    padding: 40px 20px;
+    margin: 60px auto;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.service-feature .section-head {
+    margin-bottom: 24px;
+}
+
+.service-feature .lead {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.service-claims {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    font-family: var(--mono);
+    color: var(--muted);
+    margin-bottom: 24px;
+}
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.modal-content {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 30px 40px;
+    width: 100%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--muted);
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+}
+
+.modal-close:hover {
+    color: var(--white);
+}
+
+/* Adjustments for intake form inside modal */
+.modal-content .form-shell {
+    padding: 0;
+    border: none;
+    background: transparent;
+}

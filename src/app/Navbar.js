@@ -16,7 +16,7 @@ export default function Navbar() {
                 <div className="menu-group">
                     <button className="menu-button" type="button">Services ▾</button>
                     <div className="dropdown">
-                        <Link href="/intake">
+                        <Link href="/#wallet-safety-report">
                             <strong>Wallet Safety Report</strong>
                             <small>Read-only wallet risk review, blacklist/whitelist matching, and evidence-based safety summary.</small>
                         </Link>

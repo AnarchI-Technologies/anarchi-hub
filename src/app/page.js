@@ -1,11 +1,11 @@
-import Navbar from "../Navbar";
-import "./chimera.css";
-import ServiceCarousel from "@/components/ServiceCarousel";
+'use client';
 
-export const metadata = {
-    title: "Project Chimera: The Autopoiesis Initiative",
-    description: "A proposal for a second genesis in artificial life, presented by the AnarchI Technologies Bio-synth Department.",
-};
+import { useState } from "react";
+import Navbar from "@/components/Navbar";
+import "./chimera.css";
+import Link from "next/link";
+import IntakeModal from "./IntakeModal";
+
 const services = [
     {
         kicker: "Featured service",
@@ -23,6 +23,34 @@ const services = [
 ];
 
 export default function ChimeraPage() {
+    const [modalState, setModalState] = useState({
+        isOpen: false,
+        sessionId: null,
+        email: ''
+    });
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState('');
+
+    const handleStartReport = async () => {
+        setIsLoading(true);
+        setError('');
+        try {
+            // This assumes you have a checkout API that returns a session ID and email
+            const response = await fetch('/api/checkout', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ product: 'wallet-safety-report' }) // Example body
+            });
+            if (!response.ok) throw new Error('Could not start a secure session.');
+            const { sessionId, email } = await response.json();
+            setModalState({ isOpen: true, sessionId, email });
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     return (
         <>
             <div className="wrap">
@@ -38,7 +66,7 @@ export default function ChimeraPage() {
 
                     <section className="hero">
                         <p className="kicker">Coding freedom today. Deterministically.</p>
-                        <h1>Systems with streetlight sparks and boardroom bones.</h1>
+                        <h2>Systems with streetlight sparks and boardroom bones.</h2>
                         <p className="lead">
                             AnarchI builds deterministic tools, wallet safety intelligence, agent-ready logic libraries, and practical software that feels alive without needing chaos under the hood.
                         </p>
@@ -50,7 +78,28 @@ export default function ChimeraPage() {
                         <p>Our system will begin as a software microkernel governing a swarm of simulated nanobots. Driven by a single core directive—to survive and evolve—it will learn to harvest environmental resources (carbon) to build and refine its own physical body, developing its cognitive complexity in direct response to the challenges and stimuli of its environment. This is not about programming an intelligent robot; it is about creating the conditions for intelligence to emerge.</p>
                     </section>
 
-                    <ServiceCarousel services={services} />
+                    <section id="wallet-safety-report" className="service-feature">
+                        <div className="section-head">
+                            <p className="kicker">{services[0].kicker}</p>
+                            <h2>{services[0].title}</h2>
+                            <p className="lead" style={{ maxWidth: '65ch' }}>{services[0].description}</p>
+                        </div>
+                        <div className="service-claims">
+                            {services[0].claims.map((claim, index) => (
+                                <span key={index}>{claim}</span>
+                            ))}
+                        </div>
+                        <div className="actions" style={{ justifyContent: 'center' }}>
+                            <button className="btn primary" onClick={handleStartReport} disabled={isLoading}>
+                                {isLoading ? 'Initializing...' : services[0].cta.text}
+                            </button>
+                        </div>
+                        {error && <p style={{ color: 'var(--gold)', marginTop: '1rem' }}>Error: {error}</p>}
+                    </section>
+
+                    {modalState.isOpen && (
+                        <IntakeModal sessionId={modalState.sessionId} email={modalState.email} onClose={() => setModalState({ isOpen: false, sessionId: null, email: '' })} />
+                    )}
 
                     <section>
                         <h3>2. The Problem: The Glass Wall of Disembodied AI</h3>
@@ -68,7 +117,7 @@ export default function ChimeraPage() {
                                 <li><strong>Function:</strong> Acting in concert, the swarm is a universal constructor, capable of reconfiguring itself to form limbs, sensory organs, and internal processing structures. It is a body that is not fixed but is a constantly adapting physical hypothesis.</li>
                             </ul>
                             <div className="actions">
-                                <a className="btn" href="#signal">Explore the Signal Board</a>
+                                <a className="btn" href="#signal-board">Explore the Signal Board</a>
                             </div>
                         </div>
 
@@ -94,7 +143,7 @@ export default function ChimeraPage() {
                             </ul>
                         </div>
 
-                        <div className="visual terminal-themed" aria-label="AnarchI logo themed deterministic systems console">
+                        <div id="signal-board" className="visual terminal-themed" aria-label="AnarchI logo themed deterministic systems console">
                             <div className="orbit one"></div>
                             <div className="orbit two"></div>
                             <div className="console">
@@ -164,7 +213,7 @@ export default function ChimeraPage() {
                         <p>We are proposing to build a system that learns what it means to exist by existing.</p>
                     </section>
 
-                    <footer>
+                    <footer id="documents">
                         <div>
                             <strong>AnarchI</strong>
                             <p>Childlike at heart. Rebel at soul. Professional at business.</p>
@@ -175,8 +224,6 @@ export default function ChimeraPage() {
                             <a href="#documents">Manifest</a>
                         </div>
                     </footer>
-
-                    <div className="toast" id="toast">Clicked</div>
                 </div>
             </main>
         </>
