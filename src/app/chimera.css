@@ -1,0 +1,67 @@
+.chimera-document {
+    padding: 40px 0 80px;
+    max-width: 900px;
+    margin: 0 auto;
+    font-family: var(--sans);
+}
+
+.chimera-header {
+    text-align: center;
+    margin-bottom: 60px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid var(--line);
+}
+
+.chimera-pre-title {
+    font-family: var(--mono);
+    color: var(--muted);
+    margin-bottom: 8px;
+}
+
+.chimera-document h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    letter-spacing: -0.05em;
+    line-height: 1;
+    color: var(--white);
+    margin-bottom: 12px;
+}
+
+.chimera-subtitle {
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    color: var(--gold);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+}
+
+.chimera-document section {
+    margin-bottom: 40px;
+}
+
+.chimera-document h3 {
+    font-size: 1.8rem;
+    letter-spacing: -0.04em;
+    color: var(--text);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--line);
+}
+
+.chimera-document h4 {
+    font-size: 1.2rem;
+    color: var(--gold);
+    margin-bottom: 12px;
+}
+
+.chimera-document p,
+.chimera-document li {
+    color: var(--muted);
+    line-height: 1.8;
+    font-size: 1.1rem;
+    max-width: 75ch;
+}
+
+.pillar {
+    margin-top: 24px;
+    padding-left: 20px;
+    border-left: 2px solid var(--line);
+}
