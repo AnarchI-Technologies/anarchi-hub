@@ -1,5 +1,5 @@
-import Navbar from "./components/Navbar";
-import ServiceCarousel from "./components/ServiceCarousel";
+import Navbar from "./Navbar";
+import ServiceCarousel from "./ServiceCarousel";
 
 const services = [
     {

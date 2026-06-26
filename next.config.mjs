@@ -1,14 +1,9 @@
+/** @type {import('next').NextConfig} */
 import million from 'million/compiler';
 
-/** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
     swcMinify: true,
-
-    // Remove console logs in production builds for a cleaner, more secure app.
-    compiler: {
-        removeConsole: process.env.NODE_ENV === 'production',
-    },
 
     // Configure allowed domains for Next.js Image Optimization.
     // This is a security feature to prevent misuse of the image optimization API.
@@ -46,11 +41,11 @@ const nextConfig = {
                     { key: 'X-Content-Type-Options', value: 'nosniff' },
                     { key: 'Referrer-Policy', value: 'origin-when-cross-origin' },
                     // A basic Content Security Policy. You may need to expand this based on your integrations.
-                    { key: 'Content-Security-Policy', value: "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' https:; connect-src 'self';" },
+                    { key: 'Content-Security-Policy', value: "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' https:; connect-src 'self' https:;" },
                 ],
             },
         ];
     },
 };
 
-export default million(nextConfig);
+export default million.next(nextConfig);
