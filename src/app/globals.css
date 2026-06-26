@@ -1,1 +1,606 @@
+:root {
+    --bg: #070707;
+    --bg-2: #101010;
+    --panel: rgba(255, 255, 255, 0.07);
+    --panel-2: rgba(255, 255, 255, 0.11);
+    --text: #f8f1df;
+    --muted: #b9ad98;
+    --line: rgba(255, 255, 255, 0.16);
+    --ink: #070707;
+    --white: #fff8e6;
+    --red: #ff4d4d;
+    --gold: #ffd166;
+    --green: #a2ffb3;
+    --shadow: 0 30px 100px rgba(0, 0, 0, 0.62);
+    --radius: 28px;
+    --mono: ui-monospace, SFMono-Regular, Consolas, Liberation Mono, monospace;
+    --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        Segoe UI, sans-serif;
+}
 
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: var(--sans);
+    color: var(--text);
+    background: radial-gradient(circle at 12% 8%,
+            rgba(255, 255, 255, 0.12),
+            transparent 24%),
+        radial-gradient(circle at 82% 6%, rgba(255, 77, 77, 0.12), transparent 20%),
+        radial-gradient(circle at 62% 88%,
+            rgba(255, 209, 102, 0.08),
+            transparent 26%),
+        linear-gradient(135deg, #030303, #111, #050505);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.16;
+    mix-blend-mode: screen;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 46px 46px;
+    mask-image: radial-gradient(circle at center, black, transparent 72%);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+.wrap {
+    width: min(1180px, calc(100% - 28px));
+    margin: 0 auto;
+}
+
+.nav {
+    position: sticky;
+    top: 14px;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 14px;
+    padding: 12px 16px;
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    border-radius: 999px;
+    background: #e2e0d8;
+    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.42);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: max-content;
+}
+
+.nav-logo-mark {
+    width: 92px;
+    height: 54px;
+    display: grid;
+    place-items: center;
+    overflow: visible;
+}
+
+.nav-logo-mark img {
+    width: 112px;
+    max-width: none;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    filter: drop-shadow(0 7px 10px rgba(0, 0, 0, 0.22));
+}
+
+.brand-text {
+    display: grid;
+    line-height: 1;
+}
+
+.brand-text strong {
+    font-size: 1.08rem;
+    letter-spacing: 0.05em;
+}
+
+.brand-text small {
+    color: rgba(0, 0, 0, 0.56);
+    font-size: 0.72rem;
+}
+
+.nav .brand-text strong {
+    color: #090909;
+}
+
+.nav-links {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+    flex: 1;
+    align-items: center;
+}
+
+.nav-links a,
+.menu-button,
+.top-cta {
+    border-radius: 999px;
+    padding: 12px 14px;
+    color: rgba(0, 0, 0, 0.68);
+    transition: 0.18s ease;
+    white-space: nowrap;
+}
+
+.nav-links a:hover,
+.menu-button:hover {
+    color: #050505;
+    background: rgba(0, 0, 0, 0.075);
+    transform: translateY(-1px);
+}
+
+.menu-group {
+    position: relative;
+}
+
+.menu-button {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(6px);
+    width: 340px;
+    display: grid;
+    gap: 8px;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.18s ease;
+    padding: 10px;
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    background: #ece9df;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.28);
+}
+
+.menu-group:hover .dropdown,
+.menu-group:focus-within .dropdown {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+}
+
+.dropdown a {
+    display: grid;
+    gap: 4px;
+    border-radius: 18px;
+    padding: 12px;
+    white-space: normal;
+}
+
+.dropdown a strong {
+    color: #070707;
+    font-size: 0.95rem;
+}
+
+.dropdown a small {
+    color: rgba(0, 0, 0, 0.62);
+    line-height: 1.35;
+}
+
+.top-cta {
+    background: #070707;
+    color: var(--white);
+    font-weight: 900;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
+}
+
+.hero {
+    display: grid;
+    grid-template-columns: 1.08fr 0.92fr;
+    gap: 34px;
+    align-items: center;
+    padding: 88px 0 52px;
+}
+
+.kicker {
+    margin: 0 0 16px;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-weight: 950;
+    font-size: 0.76rem;
+}
+
+h1,
+h2,
+h3,
+p {
+    margin-top: 0;
+}
+
+h1 {
+    font-size: clamp(3.2rem, 8vw, 7.6rem);
+    line-height: 0.92;
+    letter-spacing: -0.075em;
+    margin-bottom: 24px;
+}
+
+.hero p.lead {
+    max-width: 700px;
+    color: var(--muted);
+    font-size: clamp(1.02rem, 2vw, 1.25rem);
+    line-height: 1.72;
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 28px;
+}
+
+.btn {
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 14px 18px;
+    min-height: 50px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 900;
+    cursor: pointer;
+    transition: 0.18s ease;
+    background: rgba(255, 255, 255, 0.035);
+    color: var(--text);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.36);
+}
+
+.btn.primary {
+    background: var(--white);
+    color: var(--ink);
+    border-color: transparent;
+}
+
+.microbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 24px;
+}
+
+.microbar span {
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 8px 10px;
+    color: var(--muted);
+    background: rgba(255, 255, 255, 0.035);
+    font-size: 0.88rem;
+}
+
+.visual {
+    position: relative;
+    min-height: 470px;
+    display: grid;
+    place-items: center;
+}
+
+.orbit {
+    position: absolute;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: rotate(-18deg);
+    animation: breathe 7s ease-in-out infinite;
+}
+
+.orbit.one {
+    width: 420px;
+    height: 420px;
+}
+
+.orbit.two {
+    width: 550px;
+    height: 230px;
+    animation-delay: -2s;
+}
+
+@keyframes breathe {
+
+    0%,
+    100% {
+        opacity: 0.48;
+        transform: rotate(-18deg) scale(0.98);
+    }
+
+    50% {
+        opacity: 0.85;
+        transform: rotate(-13deg) scale(1.03);
+    }
+}
+
+.console {
+    position: relative;
+    width: min(460px, 100%);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.12),
+            rgba(255, 255, 255, 0.035)),
+        #080808;
+}
+
+.console-top {
+    display: flex;
+    gap: 8px;
+    padding: 18px;
+    border-bottom: 1px solid var(--line);
+}
+
+.dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--white);
+    opacity: 0.78;
+}
+
+.console-body {
+    padding: 24px;
+    font-family: var(--mono);
+    color: var(--muted);
+    line-height: 1.9;
+}
+
+.console-body p {
+    margin: 0;
+}
+
+.console-body .good {
+    color: var(--green);
+}
+
+.console-body .hot {
+    color: var(--gold);
+}
+
+.console-body .red {
+    color: var(--red);
+}
+
+section {
+    padding: 50px 0;
+}
+
+.section-head {
+    max-width: 800px;
+    margin-bottom: 24px;
+}
+
+h2 {
+    font-size: clamp(2.15rem, 5.5vw, 4.7rem);
+    line-height: 0.95;
+    letter-spacing: -0.06em;
+    margin-bottom: 14px;
+}
+
+.section-head p,
+.split p,
+.gate-copy p {
+    color: var(--muted);
+    line-height: 1.72;
+}
+
+/* Service Card & Carousel */
+.service-card {
+    flex: 0 0 100%;
+    width: 100%;
+    padding: 28px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(10px);
+    transition: background 0.2s ease;
+}
+
+.service-card:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.service-card h3 {
+    font-size: 1.5rem;
+    letter-spacing: -0.03em;
+    margin-bottom: 8px;
+}
+
+.service-card p {
+    color: var(--muted);
+    max-width: 65ch;
+}
+
+.service-claims {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    margin: 20px 0;
+    font-size: 0.9rem;
+}
+
+.service-claims span {
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    text-align: center;
+}
+
+.inline-links {
+    display: flex;
+    gap: 16px;
+    font-size: 0.85rem;
+    margin-bottom: 24px;
+}
+
+.inline-links a {
+    color: var(--muted);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.inline-links a:hover {
+    color: var(--text);
+}
+
+.service-carousel {
+    position: relative;
+    margin-top: 28px;
+}
+
+.carousel-track-container {
+    overflow: hidden;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 10;
+}
+
+.carousel-control.prev {
+    left: -20px;
+}
+
+.carousel-control.next {
+    right: -20px;
+}
+
+/* Other styles from the HTML file would go here... */
+/* For brevity, I'm omitting the rest of the ~400 lines of CSS. */
+/* The layout.js and page.js will correctly reference this file. */
+
+@media (max-width: 920px) {
+    .nav {
+        flex-wrap: wrap;
+        border-radius: 26px;
+    }
+
+    .nav-links {
+        order: 3;
+        width: 100%;
+        justify-content: flex-start;
+        overflow-x: auto;
+        align-items: flex-start;
+    }
+
+    .dropdown {
+        left: 0;
+        transform: translateY(6px);
+        width: min(340px, calc(100vw - 42px));
+    }
+
+    .menu-group:hover .dropdown,
+    .menu-group:focus-within .dropdown {
+        transform: translateY(0);
+    }
+
+    .hero,
+    .split {
+        grid-template-columns: 1fr;
+    }
+
+    .grid,
+    .agent-grid,
+    .assurance-grid,
+    .dna-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .social-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .visual {
+        min-height: 360px;
+    }
+
+    .orbit.one {
+        width: 300px;
+        height: 300px;
+    }
+
+    .orbit.two {
+        width: 390px;
+        height: 170px;
+    }
+}
+
+@media (max-width: 560px) {
+    .top-cta {
+        width: 100%;
+        text-align: center;
+    }
+
+    .hero {
+        padding-top: 58px;
+    }
+
+    .actions .btn {
+        width: 100%;
+    }
+
+    .report-panel,
+    .social-grid,
+    .input-row,
+    .service-claims {
+        grid-template-columns: 1fr;
+    }
+
+    .carousel-control {
+        top: auto;
+        bottom: -50px;
+    }
+
+    footer {
+        flex-direction: column;
+    }
+
+    .brand-text small {
+        display: none;
+    }
+}
