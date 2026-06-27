@@ -1,4 +1,6 @@
-"use client";
+﻿"use client";
+
+import { backendApi } from '@/lib/backend-api';
 
 import { useEffect, useState } from "react";
 
@@ -13,7 +15,7 @@ export default function PaymentGate({ sessionId, initialPaymentStatus, email, ch
 
     async function poll() {
       try {
-        const response = await fetch(`/api/status?session_id=${encodeURIComponent(sessionId)}`, {
+        const response = await fetch(backendApi(`/api/status?session_id=${encodeURIComponent(sessionId)}`), {
           cache: "no-store",
         });
         const data = await response.json();
@@ -69,3 +71,5 @@ export default function PaymentGate({ sessionId, initialPaymentStatus, email, ch
 
   return children;
 }
+
+

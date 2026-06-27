@@ -20,6 +20,10 @@ export default function Navbar() {
                             <strong>Wallet Safety Report</strong>
                             <small>Read-only wallet risk review, blacklist/whitelist matching, and evidence-based safety summary.</small>
                         </Link>
+                        <a href="/#anarchi-forge">
+                            <strong>AnarchI Forge</strong>
+                            <small>A deterministic IDE for building and testing agent-ready logic and skills.</small>
+                        </a>
                         <a href="/#signal">
                             <strong>Deterministic Agent Systems</strong>
                             <small>Logic-first systems that feel intelligent without making live AI the baseline.</small>

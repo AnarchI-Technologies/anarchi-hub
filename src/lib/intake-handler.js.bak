@@ -1,0 +1,33 @@
+﻿export async function handleIntake(payload = {}) {
+  const now = new Date().toISOString();
+  return {
+    ok: true,
+    message: "Intake received.",
+    data: {
+      name: payload.name || "",
+      email: payload.email || "",
+      walletAddress: payload.walletAddress || payload.address || "",
+      chain: payload.chain || "",
+      message: payload.message || "",
+      source: "anarchi-tech.com",
+      createdAt: now
+    }
+  };
+}
+export async function handleReportRequest(payload = {}) {
+  const now = new Date().toISOString();
+  return {
+    ok: true,
+    message: "Report request received.",
+    report: {
+      address: payload.walletAddress || payload.address || "",
+      chain: payload.chain || "unknown",
+      status: "queued",
+      source: "anarchi-tech.com",
+      createdAt: now
+    }
+  };
+}
+export default async function intakeHandler(payload = {}) {
+  return handleIntake(payload);
+}

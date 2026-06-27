@@ -1,4 +1,6 @@
-"use client";
+﻿"use client";
+
+import { backendApi } from '@/lib/backend-api';
 
 import { useState } from "react";
 import { listSupportedChains } from "@/lib/adapters/registry";
@@ -88,7 +90,7 @@ export default function IntakeForm({ sessionId, email }) {
     setResult(null);
 
     try {
-      const response = await fetch("/api/intake", {
+      const response = await fetch(backendApi("/api/intake"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -418,3 +420,5 @@ export default function IntakeForm({ sessionId, email }) {
     </form>
   );
 }
+
+

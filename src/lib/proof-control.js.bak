@@ -32,30 +32,4 @@ export function cryptoSafeId(prefix = "id") {
             : Math.random().toString(36).slice(2);
 
     return `${prefix}_${randomPart}`;
-}export function buildProofChallenge(input = {}) {
-  const walletAddress = String(input.walletAddress || input.address || "").trim();
-  const chain = String(input.chain || "unknown").trim().toLowerCase();
-  const issuedAt = new Date().toISOString();
-  const challengeId = [
-    "anar-proof",
-    chain || "unknown",
-    walletAddress.slice(0, 8) || "wallet",
-    Date.now().toString(36)
-  ].join("-");
-  return {
-    ok: true,
-    challengeId,
-    chain,
-    walletAddress,
-    issuedAt,
-    expiresAt: new Date(Date.now() + 1000 * 60 * 20).toISOString(),
-    message: [
-      "AnarchI Wallet Safety Report ownership check",
-      `Challenge: ${challengeId}`,
-      `Chain: ${chain}`,
-      `Wallet: ${walletAddress}`,
-      `Issued: ${issuedAt}`,
-      "Sign this message only if you understand this does not authorize token movement."
-    ].join("\n")
-  };
 }

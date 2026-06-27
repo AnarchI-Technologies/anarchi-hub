@@ -1,4 +1,4 @@
-﻿export async function refreshKnownWalletSnapshots(options = {}) {
+export async function refreshKnownWalletSnapshots(options = {}) {
   return {
     ok: true,
     status: "refreshed",
@@ -7,4 +7,3 @@
     options
   };
 }
-export * from "./registry";

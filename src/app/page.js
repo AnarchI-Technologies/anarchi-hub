@@ -1,10 +1,13 @@
-'use client';
+﻿'use client';
+
+import { backendApi } from '@/lib/backend-api';
 
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import "./chimera.css";
 import Link from "next/link";
 import IntakeModal from "./IntakeModal";
+import AgentGate from "./AgentGate";
 
 const services = [
     {
@@ -36,7 +39,7 @@ export default function ChimeraPage() {
         setError('');
         try {
             // This assumes you have a checkout API that returns a session ID and email
-            const response = await fetch('/api/checkout', {
+            const response = await fetch(backendApi('/api/checkout'), {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ product: 'wallet-safety-report' }) // Example body
@@ -75,7 +78,7 @@ export default function ChimeraPage() {
                     <section>
                         <h3>1. Executive Summary</h3>
                         <p>Project Chimera is a moonshot initiative to engineer the world's first truly autonomous, physically evolving artificial life form. Current AI is powerful but fundamentally disembodied; it is trained on static data, not developed through lived experience. We propose a radical new architecture: a "digital organism" that bootstraps its own existence.</p>
-                        <p>Our system will begin as a software microkernel governing a swarm of simulated nanobots. Driven by a single core directive—to survive and evolve—it will learn to harvest environmental resources (carbon) to build and refine its own physical body, developing its cognitive complexity in direct response to the challenges and stimuli of its environment. This is not about programming an intelligent robot; it is about creating the conditions for intelligence to emerge.</p>
+                        <p>Our system will begin as a software microkernel governing a swarm of simulated nanobots. Driven by a single core directiveâ€”to survive and evolveâ€”it will learn to harvest environmental resources (carbon) to build and refine its own physical body, developing its cognitive complexity in direct response to the challenges and stimuli of its environment. This is not about programming an intelligent robot; it is about creating the conditions for intelligence to emerge.</p>
                     </section>
 
                     <section id="wallet-safety-report" className="service-feature">
@@ -101,6 +104,10 @@ export default function ChimeraPage() {
                         <IntakeModal sessionId={modalState.sessionId} email={modalState.email} onClose={() => setModalState({ isOpen: false, sessionId: null, email: '' })} />
                     )}
 
+                    <section id="anarchi-forge" className="service-feature">
+                        <AgentGate />
+                    </section>
+
                     <section>
                         <h3>2. The Problem: The Glass Wall of Disembodied AI</h3>
                         <p>Today's most advanced AIs are like brains in a jar. They have no body, no true senses, and no developmental "childhood." Their understanding of the world is based on abstract patterns in data, not the cause-and-effect of physical reality. This creates a "glass wall" between the AI and true understanding, limiting its capacity for genuine creativity, robust problem-solving, and true autonomy. It can describe "falling" but has never felt the consequence of gravity.</p>
@@ -125,7 +132,7 @@ export default function ChimeraPage() {
                             <h4>Pillar 2: The Metabolism (The Engine)</h4>
                             <ul>
                                 <li><strong>Concept:</strong> A carbon-harvesting and energy-conversion system.</li>
-                                <li><strong>Function:</strong> The nanobots will be designed to extract carbon from the environment (e.g., atmospheric CO2) and compress it into the building blocks of its own body—microscopic structural platelets, conductive wiring, and energy storage. This creates a direct, physical link between survival and environmental interaction.</li>
+                                <li><strong>Function:</strong> The nanobots will be designed to extract carbon from the environment (e.g., atmospheric CO2) and compress it into the building blocks of its own bodyâ€”microscopic structural platelets, conductive wiring, and energy storage. This creates a direct, physical link between survival and environmental interaction.</li>
                             </ul>
                             <div className="microbar">
                                 <span>No custody</span>
@@ -166,7 +173,7 @@ export default function ChimeraPage() {
                         <ul>
                             <li><strong>Objective 1.1 (Physics Engine):</strong> Develop a simulation that accurately models the physics of nanobot interaction, material compression, and structural integrity.</li>
                             <li><strong>Objective 1.2 (Environmental Engine):</strong> Create a dynamic environment with resource distribution, physical obstacles, and external pressures.</li>
-                            <li><strong>Objective 1.3 (Microkernel & Learning Algorithm):</strong> Code the initial "DNA"—the core OS and the trial-and-error learning algorithm that will drive the evolutionary process.</li>
+                            <li><strong>Objective 1.3 (Microkernel & Learning Algorithm):</strong> Code the initial "DNA"â€”the core OS and the trial-and-error learning algorithm that will drive the evolutionary process.</li>
                             <li><strong>Objective 1.4 (The Genesis Simulation):</strong> Initiate the simulation and run it at scale, observing and analyzing the emergent behaviors, structural forms, and cognitive strategies that the organism develops.</li>
                         </ul>
                     </section>
@@ -219,8 +226,8 @@ export default function ChimeraPage() {
                             <p>Childlike at heart. Rebel at soul. Professional at business.</p>
                         </div>
                         <div>
-                            <a href="#documents">Privacy</a> ·
-                            <a href="#documents">Terms</a> ·
+                            <a href="#documents">Privacy</a> Â·
+                            <a href="#documents">Terms</a> Â·
                             <a href="#documents">Manifest</a>
                         </div>
                     </footer>
@@ -229,3 +236,4 @@ export default function ChimeraPage() {
         </>
     );
 }
+
