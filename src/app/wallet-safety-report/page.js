@@ -140,10 +140,20 @@ export default function WalletSafetyReportPage() {
           Submit a public wallet address, tell us what worries you, choose card or crypto,
           and receive an encrypted personalized safety report.
         </p>
+        <div className={styles.safetyNotice}>
+          <strong>AnarchI never asks for wallet secrets.</strong>
+          <p>
+            Do not enter seed phrases, private keys, recovery phrases, wallet passwords,
+            exchange passwords, or banking passwords. Submit only public wallet addresses.
+            AnarchI does not take custody of wallets, tokens, NFTs, or funds.
+          </p>
+        </div>
         <div className={styles.guardrails}>
+          <span>Read-only analysis.</span>
           <span>No seed phrases.</span>
           <span>No private keys.</span>
           <span>No custody.</span>
+          <span>No asset transfer.</span>
           <span>Customer-controlled actions only.</span>
         </div>
       </section>
@@ -175,6 +185,13 @@ export default function WalletSafetyReportPage() {
             <p>Step 2</p>
             <h2>Wallet details</h2>
           </div>
+          <div className={styles.fieldWarning}>
+            <strong>Public address only.</strong>
+            <span>
+              This form is not a wallet login. Never paste a seed phrase, private key,
+              recovery phrase, wallet password, exchange password, or secret backup here.
+            </span>
+          </div>
           <div className={styles.gridTwo}>
             <label>
               Chain *
@@ -186,7 +203,11 @@ export default function WalletSafetyReportPage() {
             </label>
             <label>
               Public wallet address *
-              <input value={form.walletAddress} onChange={(event) => updateField("walletAddress", event.target.value)} />
+              <input
+                value={form.walletAddress}
+                placeholder="Public address only, never a seed phrase"
+                onChange={(event) => updateField("walletAddress", event.target.value)}
+              />
             </label>
           </div>
           <label>
@@ -226,8 +247,9 @@ export default function WalletSafetyReportPage() {
             <div>
               <h3>Optional wallet proof</h3>
               <p>
-                Later, wallet signing can unlock ownership-confirmed report categories.
-                For launch, this remains optional and read-only.
+                Later, an optional signed message may help confirm wallet ownership for
+                additional report categories. This should never reveal your seed phrase,
+                private key, wallet password, or recovery phrase.
               </p>
             </div>
             <label className={styles.checkbox}>
@@ -236,7 +258,7 @@ export default function WalletSafetyReportPage() {
                 checked={form.connectWalletRequested}
                 onChange={(event) => updateField("connectWalletRequested", event.target.checked)}
               />
-              I may want ownership-confirmed report categories later.
+              I may want optional ownership-confirmed report categories later. I understand this must never require my seed phrase or private key.
             </label>
           </div>
           <div className={styles.sectionHeader}>
@@ -299,6 +321,8 @@ export default function WalletSafetyReportPage() {
             <p className={styles.price}>$50</p>
             <p className={styles.muted}>
               Choose card/bank or crypto. Your report starts after payment and intake are confirmed.
+              Payments are handled through payment providers. AnarchI does not collect card numbers
+              or wallet secrets in this form.
             </p>
             {error ? <div className={styles.error}>{error}</div> : null}
             <button
@@ -318,8 +342,9 @@ export default function WalletSafetyReportPage() {
               {loadingProvider === "crypto" ? "Opening Crypto Checkout..." : "Pay with Crypto"}
             </button>
             <div className={styles.smallPrint}>
-              Every actionable recommendation must remain customer-controlled. No private keys.
-              No hidden wallet actions. No backend signing.
+              Every actionable recommendation must remain customer-controlled. No seed phrases.
+              No private keys. No wallet passwords. No hidden wallet actions. No backend signing.
+              No custody.
             </div>
           </div>
         </aside>
@@ -327,3 +352,5 @@ export default function WalletSafetyReportPage() {
     </main>
   );
 }
+
+
