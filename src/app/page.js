@@ -6,7 +6,6 @@ import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import "./chimera.css";
 import Link from "next/link";
-import IntakeModal from "./IntakeModal";
 import AgentGate from "./AgentGate";
 
 const services = [
@@ -26,31 +25,31 @@ const services = [
 ];
 
 export default function ChimeraPage() {
-    const [modalState, setModalState] = useState({
-        isOpen: false,
-        sessionId: null,
-        email: ''
-    });
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState('');
-
-    const handleStartReport = async () => {
-        setIsLoading(true);
-        setError('');
+    const [loadingProvider, setLoadingProvider] = useState("");
+    const [error, setError] = useState("");
+    const handleStartReport = async (provider) => {
+        setLoadingProvider(provider);
+        setError("");
         try {
-            // This assumes you have a checkout API that returns a session ID and email
-            const response = await fetch(backendApi('/api/checkout'), {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ product: 'wallet-safety-report' }) // Example body
+            const response = await fetch(backendApi("/api/checkout"), {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    provider,
+                    product: "wallet-safety-report"
+                })
             });
-            if (!response.ok) throw new Error('Could not start a secure session.');
-            const { sessionId, email } = await response.json();
-            setModalState({ isOpen: true, sessionId, email });
+            const data = await response.json().catch(() => ({}));
+            if (!response.ok) {
+                throw new Error(data.error || data.detail || "Could not start checkout.");
+            }
+            if (!data.url) {
+                throw new Error("Checkout started, but no payment URL was returned.");
+            }
+            window.location.href = data.url;
         } catch (err) {
-            setError(err.message);
-        } finally {
-            setIsLoading(false);
+            setError(err instanceof Error ? err.message : "Could not start checkout.");
+            setLoadingProvider("");
         }
     };
 
@@ -92,19 +91,28 @@ export default function ChimeraPage() {
                                 <span key={index}>{claim}</span>
                             ))}
                         </div>
-                        <div className="actions" style={{ justifyContent: 'center' }}>
-                            <button className="btn primary" onClick={handleStartReport} disabled={isLoading}>
-                                {isLoading ? 'Initializing...' : services[0].cta.text}
+                        <div className="actions" style={{ justifyContent: "center", gap: "1rem", flexWrap: "wrap" }}>
+                            <button
+                                className="btn primary"
+                                onClick={() => handleStartReport("stripe")}
+                                disabled={Boolean(loadingProvider)}
+                            >
+                                {loadingProvider === "stripe" ? "Opening Stripe..." : "Pay with Card / Debit / Bank"}
+                            </button>
+                            <button
+                                className="btn"
+                                onClick={() => handleStartReport("crypto")}
+                                disabled={Boolean(loadingProvider)}
+                            >
+                                {loadingProvider === "crypto" ? "Opening Crypto Invoice..." : "Pay with Crypto"}
                             </button>
                         </div>
+                        <p className="mini" style={{ textAlign: "center", marginTop: "0.75rem" }}>
+                            Both options unlock the same deterministic wallet safety intake after payment confirmation.
+                        </p>
                         {error && <p style={{ color: 'var(--gold)', marginTop: '1rem' }}>Error: {error}</p>}
                     </section>
-
-                    {modalState.isOpen && (
-                        <IntakeModal sessionId={modalState.sessionId} email={modalState.email} onClose={() => setModalState({ isOpen: false, sessionId: null, email: '' })} />
-                    )}
-
-                    <section id="anarchi-forge" className="service-feature">
+<section id="anarchi-forge" className="service-feature">
                         <AgentGate />
                     </section>
 
@@ -236,4 +244,9 @@ export default function ChimeraPage() {
         </>
     );
 }
+
+
+
+
+
 
