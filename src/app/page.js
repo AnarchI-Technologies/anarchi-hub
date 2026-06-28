@@ -1,115 +1,50 @@
-﻿'use client';
-import { useState } from "react";
-import { backendApi } from "@/lib/backend-api";
+﻿import Link from "next/link";
 import "./home.css";
-const trustPoints = [
-  "No seed phrases",
-  "No private keys",
-  "No custody",
-  "Read-only review",
-];
-const reportItems = [
-  "Wallet risk summary",
-  "Known blacklist and signal matching",
-  "Approval and interaction warnings",
-  "Evidence tags and limitations",
-  "Deterministic report output",
-];
-export default function HomePage() {
-  const [loadingProvider, setLoadingProvider] = useState("");
-  const [error, setError] = useState("");
-  const handleCheckout = async (provider) => {
-    setLoadingProvider(provider);
-    setError("");
-    try {
-      const response = await fetch(backendApi("/api/checkout"), {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          provider,
-          product: "wallet-safety-report",
-        }),
-      });
-      const data = await response.json().catch(() => ({}));
-      if (!response.ok) {
-        throw new Error(data.detail || data.error || "Could not start checkout.");
-      }
-      if (!data.url) {
-        throw new Error("Checkout started, but no payment URL was returned.");
-      }
-      window.location.href = data.url;
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Could not start checkout.");
-      setLoadingProvider("");
-    }
-  };
+export default function Home() {
   return (
-    <main className="anarchi-home">
-      <section className="hero-panel">
-        <div className="brand-row">
-          <div className="logo-mark" aria-label="AnarchI logo mark">A-I</div>
-          <div>
-            <p className="eyebrow">AnarchI Technologies</p>
-            <h1>Deterministic Wallet Safety Reports</h1>
-          </div>
-        </div>
+    <main className="home-page">
+      <section className="hero-card">
+        <p className="eyebrow">AnarchI Technologies</p>
+        <h1>Deterministic Wallet Safety Reports</h1>
         <p className="hero-copy">
-          A read-only wallet risk review before users interact with funds,
-          contracts, approvals, or unfamiliar addresses.
+          Read-only wallet safety reports built for people who want clarity before they move funds,
+          approve contracts, chase mints, or keep using a wallet with years of history.
         </p>
-        <div className="trust-strip">
-          {trustPoints.map((point) => (
-            <span key={point}>{point}</span>
-          ))}
+        <div className="hero-actions">
+          <Link className="primary-link" href="/wallet-safety-report">
+            Get Wallet Safety Report
+          </Link>
+          <a className="secondary-link" href="#details">
+            Learn what is included
+          </a>
         </div>
-        <div className="checkout-card" id="checkout">
-          <p className="price">$50 Wallet Safety Report</p>
-          <div className="checkout-actions">
-            <button
-              className="btn primary"
-              onClick={() => handleCheckout("stripe")}
-              disabled={Boolean(loadingProvider)}
-            >
-              {loadingProvider === "stripe" ? "Opening Stripe..." : "Pay with Card / Debit / Bank"}
-            </button>
-            <button
-              className="btn secondary"
-              onClick={() => handleCheckout("crypto")}
-              disabled={Boolean(loadingProvider)}
-            >
-              {loadingProvider === "crypto" ? "Opening Crypto Invoice..." : "Pay with Crypto"}
-            </button>
-          </div>
-          {error && <p className="error">Error: {error}</p>}
-          <p className="fine-print">
-            Both payment options unlock the same intake flow after payment confirmation.
-          </p>
+        <div className="trust-row">
+          <span>No seed phrases.</span>
+          <span>No private keys.</span>
+          <span>No custody.</span>
+          <span>Customer-controlled actions.</span>
         </div>
       </section>
-      <section className="content-grid">
-        <article className="info-card">
+      <section className="info-grid" id="details">
+        <article>
           <h2>What you get</h2>
-          <ul>
-            {reportItems.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
+          <p>
+            A personalized wallet safety report with risk notes, public-address review,
+            report tuning based on your concerns, and actionable next steps where available.
+          </p>
         </article>
-        <article className="info-card">
+        <article>
           <h2>How it works</h2>
-          <ol>
-            <li>Choose fiat or crypto checkout.</li>
-            <li>Complete payment through the provider.</li>
-            <li>Submit wallet details through the secure intake.</li>
-            <li>Receive a deterministic safety report.</li>
-          </ol>
+          <p>
+            Submit your public wallet address, answer the report questionnaire, choose card or crypto,
+            and receive an encrypted report after payment and intake are confirmed.
+          </p>
         </article>
-        <article className="info-card">
+        <article>
           <h2>Built different</h2>
           <p>
-            AnarchI is not trying to custody assets or become a crypto casino.
-            The focus is deterministic software: clear inputs, auditable logic,
-            practical outputs, and fewer wrong-wallet mistakes.
+            AnarchI focuses on deterministic software, customer control, and read-only analysis.
+            Reports should become useful repair maps, not static novelty PDFs.
           </p>
         </article>
       </section>
