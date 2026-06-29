@@ -7,7 +7,7 @@ export const metadata = {
     "AnarchI Technologies builds deterministic software, practical digital safety tools, and customer-controlled systems. Wallet Safety Reports are our first active service.",
 };
 const navLinks = [
-  ["#products", "Products"],
+  ["/products", "Products"],
   ["#method", "Method"],
   ["#safety", "Safety"],
   ["/about", "About"],
@@ -43,29 +43,7 @@ const productCards = [
 export default function Home() {
   return (
     <main className="home-page">
-      <header className="site-nav">
-        <Link className="nav-brand" href="/">
-          <Image
-            src="/brand/anarchi-logo.png"
-            alt="AnarchI Technologies logo"
-            width={58}
-            height={58}
-            priority
-          />
-          <span>
-            <strong>AnarchI</strong>
-            <small>Technologies</small>
-          </span>
-        </Link>
-        <nav aria-label="Primary navigation">
-          {navLinks.map(([href, label]) => (
-            <Link key={href} href={href}>
-              {label}
-            </Link>
-          ))}
-        </nav>
-      </header>
-      <section className="hero-card">
+<section className="hero-card">
         <div className="hero-layout">
           <div>
             <p className="eyebrow">Coding Freedom Today. Deterministically.</p>
@@ -180,9 +158,13 @@ export default function Home() {
           <Link href="/refund-policy">Refunds</Link>
           <Link href="/delivery-policy">Delivery</Link>
           <Link href="/risk-policy">Risk Policy</Link>
+          <Link href="/products">Products</Link>
+          <Link href="/public-index">Public Index</Link>
           <Link href="/legal">Legal</Link>
         </nav>
       </footer>
     </main>
   );
 }
+
+
