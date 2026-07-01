@@ -223,3 +223,26 @@
   line-height: 1.55;
   margin: 0;
 }
+.safetyNotice,
+.fieldWarning {
+  border: 1px solid rgba(245, 199, 92, 0.38);
+  background: rgba(245, 199, 92, 0.08);
+  border-radius: 18px;
+  padding: 1rem;
+  margin-top: 1.25rem;
+}
+.fieldWarning {
+  margin: 0 0 1rem;
+}
+.safetyNotice strong,
+.fieldWarning strong {
+  display: block;
+  color: #fff;
+  margin-bottom: 0.35rem;
+}
+.safetyNotice p,
+.fieldWarning span {
+  color: #d9d2c3;
+  line-height: 1.55;
+  margin: 0;
+}
