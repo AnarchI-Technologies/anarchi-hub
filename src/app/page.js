@@ -146,7 +146,7 @@ export default function Home() {
       <footer className="site-footer">
         <div>
           <strong>AnarchI Technologies</strong>
-          <p>3850 S Meridian Ave, Wichita, KS 67217</p>
+          <p>Remote-first deterministic software company</p>
           <p>admin@anarchi-tech.com</p>
         </div>
         <nav aria-label="Footer navigation">
@@ -166,5 +166,6 @@ export default function Home() {
     </main>
   );
 }
+
 
 
