@@ -1,0 +1,36 @@
+[1mdiff --git a/src/app/layout.js b/src/app/layout.js[m
+[1mindex b09e872..4a9a0a0 100644[m
+[1m--- a/src/app/layout.js[m
+[1m+++ b/src/app/layout.js[m
+[36m@@ -1,4 +1,4 @@[m
+[31m-﻿import "./globals.css";[m
+[32m+[m[32mimport "./globals.css";[m
+ import SiteNav from "./components/SiteNav";[m
+ import Script from "next/script";[m
+ export const metadata = {[m
+[36m@@ -27,7 +27,19 @@[m [mexport default function RootLayout({ children }) {[m
+           </>[m
+         )}[m
+       </head>[m
+[31m-      <body>[m
+[32m+[m[32m      <body>[m[41m[m
+[32m+[m[32m        <Script[m
+[32m+[m[32m          src="https://www.googletagmanager.com/gtag/js?id=G-6HQFS83PH3"[m
+[32m+[m[32m          strategy="afterInteractive"[m
+[32m+[m[32m        />[m
+[32m+[m[32m        <Script id="google-analytics" strategy="afterInteractive">[m
+[32m+[m[32m          {`[m
+[32m+[m[32m            window.dataLayer = window.dataLayer || [];[m
+[32m+[m[32m            function gtag(){window.dataLayer.push(arguments);}[m
+[32m+[m[32m            gtag('js', new Date());[m
+[32m+[m[32m            gtag('config', 'G-6HQFS83PH3');[m
+[32m+[m[32m          `}[m
+[32m+[m[32m        </Script>[m
+         <SiteNav />[m
+         {children}[m
+       </body>[m
+[36m@@ -35,3 +47,4 @@[m [mexport default function RootLayout({ children }) {[m
+   );[m
+ }[m
+ [m
+[41m+[m
