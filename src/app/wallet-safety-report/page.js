@@ -1,6 +1,7 @@
 ﻿"use client";
 import { useMemo, useState } from "react";
 import { backendApi } from "@/lib/backend-api";
+import { event as gtagEvent } from '@/lib/gtag';
 import styles from "./report-order.module.css";
 const initialForm = {
   firstName: "",
@@ -125,6 +126,10 @@ export default function WalletSafetyReportPage() {
       if (!data?.url) {
         throw new Error("Checkout response did not include a payment URL.");
       }
+      // Fire analytics event and capture a lightweight lead record
+      try { gtagEvent({ action: 'checkout_started', category: 'purchase', label: provider, params: { provider } }); } catch (e) {}
+      try { fetch('/api/leads', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ source: 'checkout_start', email: form.email, payload: { provider, wallet: form.walletAddress } }) }); } catch (e) {}
+
       window.location.href = data.url;
     } catch (err) {
       setError(err instanceof Error ? err.message : "Checkout failed.");
