@@ -11,7 +11,7 @@ export default function Navbar() {
             </Link>
 
             <div className="nav-links">
-                <a href="/#signal">Signal Board</a>
+                <Link href="/#signal">Signal Board</Link>
 
                 <div className="menu-group">
                     <button className="menu-button" type="button">Services ▾</button>
@@ -20,36 +20,36 @@ export default function Navbar() {
                             <strong>Wallet Safety Report</strong>
                             <small>Read-only wallet risk review, blacklist/whitelist matching, and evidence-based safety summary.</small>
                         </Link>
-                        <a href="/#anarchi-forge">
+                        <Link href="/#anarchi-forge">
                             <strong>AnarchI Forge</strong>
                             <small>A deterministic IDE for building and testing agent-ready logic and skills.</small>
-                        </a>
-                        <a href="/#signal">
+                        </Link>
+                        <Link href="/#signal">
                             <strong>Deterministic Agent Systems</strong>
                             <small>Logic-first systems that feel intelligent without making live AI the baseline.</small>
-                        </a>
-                        <a href="/#signal">
+                        </Link>
+                        <Link href="/#signal">
                             <strong>Launch Preflight</strong>
                             <small>Project readiness checks before public launch, payments, wallets, and links go live.</small>
-                        </a>
+                        </Link>
                     </div>
                 </div>
 
                 <div className="menu-group">
                     <button className="menu-button" type="button">Resources ▾</button>
                     <div className="dropdown">
-                        <a href="/#documents">
+                        <Link href="/#documents">
                             <strong>Documents</strong>
                             <small>Manifest, methodology, terms, privacy, and service boundaries.</small>
-                        </a>
-                        <a href="/#socials">
+                        </Link>
+                        <Link href="/#socials">
                             <strong>Social Platforms</strong>
                             <small>Live channels for updates, proof, build logs, source code, and community signals.</small>
-                        </a>
-                        <a href="/#documents">
+                        </Link>
+                        <Link href="/#documents">
                             <strong>Methodology Library</strong>
                             <small>Rules, boundaries, report logic, and explainable documentation.</small>
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

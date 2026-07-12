@@ -1,9 +1,14 @@
 /** @type {import('next').NextConfig} */
-import million from 'million/compiler';
+import { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const projectRoot = dirname(fileURLToPath(import.meta.url));
 
 const nextConfig = {
     reactStrictMode: true,
-    swcMinify: true,
+    turbopack: {
+        root: projectRoot,
+    },
 
     // Configure allowed domains for Next.js Image Optimization.
     // This is a security feature to prevent misuse of the image optimization API.
@@ -48,4 +53,4 @@ const nextConfig = {
     },
 };
 
-export default million.next(nextConfig);
+export default nextConfig;
