@@ -1,0 +1,30 @@
+[Unit]
+Description=AnarchI Hub Next.js service
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=%i
+Group=%i
+WorkingDirectory=/home/%i/anarchi-hub
+Environment=NODE_ENV=production
+Environment=HOSTNAME=127.0.0.1
+Environment=PORT=3000
+EnvironmentFile=-/etc/anarchi-hub/anarchi-hub.env
+ExecStart=/usr/bin/npm run start:local
+Restart=on-failure
+RestartSec=5s
+TimeoutStopSec=30s
+KillSignal=SIGTERM
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=anarchi-hub
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/home/%i/anarchi-hub/.next
+
+[Install]
+WantedBy=multi-user.target

@@ -1,5 +1,6 @@
 ﻿import Link from "next/link";
 import "../policy.css";
+import { cerberusContent } from "@/content/cerberus";
 export const metadata = {
   title: "Products | AnarchI Technologies",
   description:
@@ -51,15 +52,7 @@ const products = [
     cta: "Request info",
   },
   {
-    status: "Coming Soon",
-    name: "CERBERUS Agent Systems",
-    audience: "Game-agent builders and tactical automation experiments",
-    useCase:
-      "A future agent-system track for tactical decision loops, game bots, battle logic, memory, and constrained autonomous behavior in permitted environments.",
-    boundary:
-      "Public docs and safe examples may be shared. Strategy engines, adaptive logic, private memory models, and competitive behavior systems may remain privately licensed.",
-    href: "/contact",
-    cta: "Request info",
+    ...cerberusContent.card,
   },
   {
     status: "Research / Private Development",
