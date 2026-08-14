@@ -1,0 +1,30 @@
+export const cerberusContent = {
+  name: "CERBERUS",
+  eyebrow: "Deterministic autonomous operations",
+  summary: "CERBERUS is a local-first deterministic autonomous operations platform that combines explicit policy, persistent memory, interchangeable integrations, and optional governed model assistance.",
+  status: "Active Development",
+  operatingMode: "Local-first",
+  decisionAuthority: "Deterministic",
+  principles: [
+    { title: "Explicit authority", body: "Deterministic systems remain authoritative for operational and gameplay decisions. Model assistance is optional and advisory." },
+    { title: "Local autonomy", body: "Core operation is designed to remain local-first, reducing recurring infrastructure cost and dependence on external services." },
+    { title: "Evidence and memory", body: "Persistent memory, bounded experiments, evidence, and post-mortems support measured learning without surrendering control." },
+    { title: "Interchangeable adapters", body: "Game and service integrations are intended to become replaceable adapters around a stable operational core." },
+  ],
+  milestones: [
+    "Persistent supervised local operation",
+    "Deterministic decision loop as the control authority",
+    "Optional governed local model gateway",
+    "Public-safe status projection boundary",
+    "Adapter expansion beyond the current proving environment",
+  ],
+  card: {
+    status: "Active Development",
+    name: "CERBERUS",
+    audience: "Operators, game-agent builders, and deterministic-systems researchers",
+    useCase: "Local-first autonomous operations built around explicit policy, persistent memory, evidence, and bounded integrations.",
+    boundary: "This site presents an intentionally public product view only. Runtime controls, private memory, credentials, wallets, and gameplay APIs remain isolated.",
+    href: "/products/cerberus",
+    cta: "Explore CERBERUS",
+  },
+};
